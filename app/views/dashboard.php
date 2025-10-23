@@ -6,34 +6,50 @@
   <title>Smart Weather Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<script src="assets/js/datetime.js"></script>
 <body class="bg-gray-100 min-h-screen flex flex-col font-sans">
 
   <!-- 🔹 Top Navbar -->
   <header class="bg-white shadow-md px-6 py-4 flex items-center justify-between rounded-b-2xl">
+    <!-- Left side: Logo -->
+    <div class="flex items-center space-x-2">
+      <img src="assets/icons/logo.svg" alt="Logo" class="w-13 h-13 object-contain">
+    </div>
+
+    <!-- Center + Right side -->
     <div class="flex items-center space-x-4">
-      <div class="font-bold text-xl">Logo</div>
-      <div class="flex items-center text-gray-600">
-        <img src="assets/icons/location.svg" alt="Location Icon" class="w-5 h-5 mr-1">
-        <span>Jakarta, Indonesia</span>
+      <!-- Location + DateTime + Search -->
+      <div class="flex items-center space-x-3">
+        <!-- Location -->
+        <div class="flex items-center text-gray-600 text-sm font-medium">
+          <img src="assets/icons/location.svg" alt="Location Icon" class="w-5 h-5 mr-1">
+          <span>Jakarta, Indonesia</span>
+        </div>
+
+        <!-- 🕒 Date & Time -->
+        <div id="datetime" class="text-gray-600 text-sm font-medium"></div>
+
+        <!-- Search -->
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Cari Lokasi"
+            class="w-64 pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <img
+            src="assets/icons/search.svg"
+            alt="Search Icon"
+            class="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          />
+        </div>
+      </div>
+
+      <!-- User Profile -->
+      <div class="flex items-center space-x-2 border px-3 py-2 rounded-full">
+        <div class="w-8 h-8 bg-[#F9802C] rounded-full"></div>
+        <span class="text-gray-700 font-medium">Fahmi Hanafi</span>
       </div>
     </div>
-
-    <div class="flex items-center space-x-4">
-    <div class="relative">
-      <input type="text"
-        placeholder="Cari Lokasi"
-        class="w-64 pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400" />
-      <!-- Search icon inside input -->
-      <img src="assets/icons/search.svg"
-        alt="Search Icon"
-        class="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-    </div>
-
-    <div class="flex items-center space-x-2 border px-3 py-2 rounded-full">
-      <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-      <span class="text-gray-700 font-medium">Fahmi Hanafi</span>
-    </div>
-  </div>
   </header>
 
   <!-- 🔹 Main Content Grid -->
