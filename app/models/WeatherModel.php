@@ -58,4 +58,32 @@ class WeatherModel {
 
         return json_decode($response, true);
     }
+
+    public static function getForecastData($city) {
+        global $API_KEY;
+
+        $url = "http://api.openweathermap.org/data/2.5/forecast?q={$city}&appid={$API_KEY}&units=metric";
+
+        $context = stream_context_create([
+            "http" => [
+                "method" => "GET",
+                "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            ]
+        ]);
+
+        $response = @file_get_contents($url, false, $context);
+
+        if ($response === false) {
+            return null;
+        }
+
+        $data = json_decode($response, true);
+
+        // Check if API returned an error
+        if (isset($data['cod']) && $data['cod'] != "200") {
+            return null;
+        }
+
+        return $data;
+    }
 }

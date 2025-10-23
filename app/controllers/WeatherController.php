@@ -7,6 +7,7 @@ class WeatherController {
     public static function showDashboard($city) {
         $weather = WeatherModel::getWeatherData($city);
         $air = null;
+        $forecast = WeatherModel::getForecastData($city);
 
         if ($weather && isset($weather['coord'])) {
             $lat = $weather['coord']['lat'];

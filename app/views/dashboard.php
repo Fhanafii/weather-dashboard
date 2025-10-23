@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <script src="assets/js/datetime.js"></script>
+<script src="assets/js/tabs.js"></script>
 <body class="bg-gray-100 min-h-screen flex flex-col font-sans">
 
   <!-- 🔹 Top Navbar -->
@@ -180,13 +181,94 @@
     </div>
 
     <!-- Right Column -->
-    <div class="bg-white rounded-2xl p-6 shadow flex flex-col">
+    <div class="rounded-2xl p-6 shadow flex flex-col" style="background-image: url('assets/img/bluesky.png'); background-size: cover; background-position: center;">
       <div class="flex">
-        <div class="flex-1 text-center border-b-2 border-black font-semibold">Today</div>
-        <div class="flex-1 text-center border-b text-gray-400">Tomorrow</div>
+        <div id="today-tab" class="flex-1 text-center border-b-2 border-white font-bold text-white cursor-pointer uppercase" onclick="switchTab('today')">Today</div>
+        <div id="tomorrow-tab" class="flex-1 text-center border-b-0 font-normal text-white cursor-pointer uppercase" onclick="switchTab('tomorrow')">Tomorrow</div>
       </div>
-      <div class="flex-1 mt-4 flex items-center justify-center text-gray-400">
-        <p>Data akan muncul di sini...</p>
+      <div id="today-content" class="flex-1 mt-4">
+        <?php if ($forecast && isset($forecast['list'])): ?>
+          <div class="space-y-4 overflow-y-auto max-h-full">
+            <?php
+            $today = date('Y-m-d');
+            $count = 0;
+            foreach ($forecast['list'] as $item):
+              if ($count >= 8) break; // Show only 8 entries (24 hours / 3 hours = 8)
+              $dt = date('Y-m-d', strtotime($item['dt_txt']));
+              if ($dt === $today):
+                $time = date('H:i', strtotime($item['dt_txt']));
+                $temp = round($item['main']['temp']);
+                $humidity = $item['main']['humidity'];
+                $windSpeed = $item['wind']['speed'];
+                $description = ucfirst($item['weather'][0]['description']);
+                $icon = $item['weather'][0]['icon'];
+            ?>
+              <div class="bg-white bg-opacity-20 rounded-lg p-3 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <img src="https://openweathermap.org/img/wn/<?= $icon ?>@2x.png" alt="<?= $description ?>" class="w-10 h-10">
+                  <div>
+                    <p class="text-white font-semibold text-sm"><?= $time ?></p>
+                    <p class="text-white text-xs opacity-80"><?= $description ?></p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-white font-bold text-lg"><?= $temp ?>°C</p>
+                  <p class="text-white text-xs">💧 <?= $humidity ?>% 💨 <?= $windSpeed ?> m/s</p>
+                </div>
+              </div>
+            <?php
+                $count++;
+              endif;
+            endforeach;
+            ?>
+          </div>
+        <?php else: ?>
+          <div class="flex items-center justify-center text-gray-400 h-full">
+            <p>Data akan muncul di sini...</p>
+          </div>
+        <?php endif; ?>
+      </div>
+      <div id="tomorrow-content" class="flex-1 mt-4 hidden">
+        <?php if ($forecast && isset($forecast['list'])): ?>
+          <div class="space-y-4 overflow-y-auto max-h-full">
+            <?php
+            $tomorrow = date('Y-m-d', strtotime('+1 day'));
+            $count = 0;
+            foreach ($forecast['list'] as $item):
+              if ($count >= 8) break; // Show only 8 entries (24 hours / 3 hours = 8)
+              $dt = date('Y-m-d', strtotime($item['dt_txt']));
+              if ($dt === $tomorrow):
+                $time = date('H:i', strtotime($item['dt_txt']));
+                $temp = round($item['main']['temp']);
+                $humidity = $item['main']['humidity'];
+                $windSpeed = $item['wind']['speed'];
+                $description = ucfirst($item['weather'][0]['description']);
+                $icon = $item['weather'][0]['icon'];
+            ?>
+              <div class="bg-white bg-opacity-20 rounded-lg p-3 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <img src="https://openweathermap.org/img/wn/<?= $icon ?>@2x.png" alt="<?= $description ?>" class="w-10 h-10">
+                  <div>
+                    <p class="text-white font-semibold text-sm"><?= $time ?></p>
+                    <p class="text-white text-xs opacity-80"><?= $description ?></p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-white font-bold text-lg"><?= $temp ?>°C</p>
+                  <p class="text-white text-xs">💧 <?= $humidity ?>% 💨 <?= $windSpeed ?> m/s</p>
+                </div>
+              </div>
+            <?php
+                $count++;
+              endif;
+            endforeach;
+            ?>
+          </div>
+        <?php else: ?>
+          <div class="flex items-center justify-center text-gray-400 h-full">
+            <p>Data untuk besok akan muncul di sini...</p>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </main>
