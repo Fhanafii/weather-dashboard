@@ -187,6 +187,21 @@
         <div id="tomorrow-tab" class="flex-1 text-center border-b-0 font-normal text-white cursor-pointer uppercase" onclick="switchTab('tomorrow')">Tomorrow</div>
       </div>
       <div id="today-content" class="flex-1 mt-4">
+        <?php
+        function getCustomIcon($icon) {
+          $code = substr($icon, 0, 2);
+          switch($code) {
+            case '01': return 'clearsky.svg';
+            case '02': return 'fewclouds.svg';
+            case '03':
+            case '04': return 'brokenclouds.svg';
+            case '09':
+            case '10': return 'rain.svg';
+            case '11': return 'thunderstrom.svg';
+            default: return false; // Use default OpenWeatherMap icon
+          }
+        }
+        ?>
         <?php if ($forecast && isset($forecast['list'])): ?>
           <div class="space-y-4 overflow-y-auto max-h-full">
             <?php
@@ -202,20 +217,28 @@
                 $windSpeed = $item['wind']['speed'];
                 $description = ucfirst($item['weather'][0]['description']);
                 $icon = $item['weather'][0]['icon'];
+                $customIcon = getCustomIcon($icon);
+                $iconSrc = $customIcon ? "assets/icons/{$customIcon}" : "https://openweathermap.org/img/wn/{$icon}@2x.png";
             ?>
               <div class="bg-white bg-opacity-20 rounded-lg p-3 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                  <img src="https://openweathermap.org/img/wn/<?= $icon ?>@2x.png" alt="<?= $description ?>" class="w-10 h-10">
-                  <div>
-                    <p class="text-white font-semibold text-sm"><?= $time ?></p>
-                    <p class="text-white text-xs opacity-80"><?= $description ?></p>
+                <div class="flex items-center space-x-16 pl-6">
+                  <img src="<?= $iconSrc ?>" alt="<?= $description ?>" class="w-10 h-10">
+                  <div class="flex flex-col items-center text-center w-40 truncate">
+                    <p class="text-white font-bold text-lg"><?= $time ?></p>
+                    <p class="text-white font-bold text-lg opacity-80 truncate"><?= $description ?></p>
                   </div>
                 </div>
-                <div class="text-right">
-                  <p class="text-white font-bold text-lg"><?= $temp ?>°C</p>
-                  <p class="text-white text-xs">💧 <?= $humidity ?>% 💨 <?= $windSpeed ?> m/s</p>
+                <div class="flex items-end text-white space-x-12 text-right">
+                <!-- Temperature -->
+                <p class="text-[40px] font-extrabold"><?= $temp ?>°C</p>
+
+                <!-- Humidity + Wind (stacked vertically, right aligned) -->
+                <div class="flex flex-col text-xl font-semibold leading-tight items-start pr-10">
+                  <p>💧 <?= $humidity ?>%</p>
+                  <p>💨 <?= $windSpeed ?> m/s</p>
                 </div>
               </div>
+            </div>
             <?php
                 $count++;
               endif;
@@ -244,20 +267,28 @@
                 $windSpeed = $item['wind']['speed'];
                 $description = ucfirst($item['weather'][0]['description']);
                 $icon = $item['weather'][0]['icon'];
+                $customIcon = getCustomIcon($icon);
+                $iconSrc = $customIcon ? "assets/icons/{$customIcon}" : "https://openweathermap.org/img/wn/{$icon}@2x.png";
             ?>
               <div class="bg-white bg-opacity-20 rounded-lg p-3 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                  <img src="https://openweathermap.org/img/wn/<?= $icon ?>@2x.png" alt="<?= $description ?>" class="w-10 h-10">
-                  <div>
-                    <p class="text-white font-semibold text-sm"><?= $time ?></p>
-                    <p class="text-white text-xs opacity-80"><?= $description ?></p>
+                <div class="flex items-center space-x-16 pl-6">
+                  <img src="<?= $iconSrc ?>" alt="<?= $description ?>" class="w-10 h-10">
+                  <div class="flex flex-col items-center text-center w-40 truncate">
+                    <p class="text-white font-bold text-lg"><?= $time ?></p>
+                    <p class="text-white font-bold text-lg opacity-80 truncate"><?= $description ?></p>
                   </div>
                 </div>
-                <div class="text-right">
-                  <p class="text-white font-bold text-lg"><?= $temp ?>°C</p>
-                  <p class="text-white text-xs">💧 <?= $humidity ?>% 💨 <?= $windSpeed ?> m/s</p>
+                <div class="flex items-end text-white space-x-12 text-right">
+                <!-- Temperature -->
+                <p class="text-[40px] font-extrabold"><?= $temp ?>°C</p>
+
+                <!-- Humidity + Wind (stacked vertically, right aligned) -->
+                <div class="flex flex-col text-xl font-semibold leading-tight items-start pr-10">
+                  <p>💧 <?= $humidity ?>%</p>
+                  <p>💨 <?= $windSpeed ?> m/s</p>
                 </div>
               </div>
+            </div>
             <?php
                 $count++;
               endif;
