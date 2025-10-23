@@ -8,6 +8,15 @@
 </head>
 <script src="assets/js/datetime.js"></script>
 <script src="assets/js/tabs.js"></script>
+<script src="assets/js/search.js"></script>
+<script>
+  // Initialize timezone update when page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    // Pass weather data to update timezone
+    const weatherData = <?= json_encode($weather) ?>;
+    updateTimezoneFromWeather(weatherData);
+  });
+</script>
 <body class="bg-gray-100 min-h-screen flex flex-col font-sans">
 
   <!-- 🔹 Top Navbar -->
@@ -24,7 +33,9 @@
         <!-- Location -->
         <div class="flex items-center text-gray-600 text-sm font-medium">
           <img src="assets/icons/location.svg" alt="Location Icon" class="w-5 h-5 mr-1">
-          <span>Jakarta, Indonesia</span>
+          <span id="current-location">
+            <?= isset($weather['name']) && isset($weather['sys']['country']) ? $weather['name'] . ', ' . $weather['sys']['country'] : 'Jakarta, Indonesia'; ?>
+          </span>
         </div>
 
         <!-- 🕒 Date & Time -->
@@ -35,7 +46,7 @@
           <input
             type="text"
             placeholder="Cari Lokasi"
-            class="w-64 pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            class="w-64 pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
           />
           <img
             src="assets/icons/search.svg"
@@ -234,8 +245,8 @@
 
                 <!-- Humidity + Wind (stacked vertically, right aligned) -->
                 <div class="flex flex-col text-xl font-semibold leading-tight items-start pr-10">
-                  <p>💧 <?= $humidity ?>%</p>
-                  <p>💨 <?= $windSpeed ?> m/s</p>
+                  <p><img src="assets/icons/humidity.svg" alt="Humidity" class="w-4 h-4 inline"> <?= $humidity ?>%</p>
+                  <p><img src="assets/icons/forecastwind.svg" alt="Wind" class="w-4 h-4 inline"> <?= $windSpeed ?> m/s</p>
                 </div>
               </div>
             </div>
@@ -284,8 +295,8 @@
 
                 <!-- Humidity + Wind (stacked vertically, right aligned) -->
                 <div class="flex flex-col text-xl font-semibold leading-tight items-start pr-10">
-                  <p>💧 <?= $humidity ?>%</p>
-                  <p>💨 <?= $windSpeed ?> m/s</p>
+                  <p><img src="assets/icons/humidity.svg" alt="Humidity" class="w-4 h-4 inline"> <?= $humidity ?>%</p>
+                  <p><img src="assets/icons/forecastwind.svg" alt="Wind" class="w-4 h-4 inline"> <?= $windSpeed ?> m/s</p>
                 </div>
               </div>
             </div>
