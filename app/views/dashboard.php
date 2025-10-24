@@ -149,108 +149,99 @@
 
         <div class="mt-auto bg-[#19273E] bg-opacity-100 rounded-lg p-4">
           <div class="text-xl font-semibold inline-block px-3 py-1 rounded">
-            <?php
-            $aqi = isset($air['list'][0]['main']['aqi']) ? $air['list'][0]['main']['aqi'] : null;
-            if ($aqi == 1) echo 'Baik';
-            elseif ($aqi == 2) echo 'Sedang';
-            elseif ($aqi == 3) echo 'Tidak Sehat';
-            elseif ($aqi == 4) echo 'Sangat Tidak Sehat';
-            elseif ($aqi == 5) echo 'Berbahaya';
-            else echo 'Tidak diketahui';
-            ?>
+            <?= $aqi_status ?>
           </div>
           <div class="w-full bg-gray-200 rounded-full h-3 mt-2">
-            <div class="bg-yellow-400 h-3 rounded-full" style="width: <?= $aqi ? ($aqi * 20) . '%' : '0%'; ?>"></div>
+            <div class="bg-yellow-400 h-3 rounded-full" style="width: <?= $aqi_progress ?>"></div>
           </div>
         </div>
       </div>
 
-<!-- Temperature Trend Card -->
-<div class="col-span-2 bg-white rounded-2xl p-6 shadow flex justify-between items-stretch relative">
+    <!-- Temperature Trend Card -->
+    <div class="col-span-2 bg-white rounded-2xl p-6 shadow flex justify-between items-stretch relative">
 
-  <!-- 🌡️ Left Section – Temperature Trend -->
-  <div class="flex-1 flex flex-col justify-start items-start relative pr-6">
-    <!-- Title -->
-    <h2 class="text-[36px] font-bold text-gray-900 mb-6 text-left">
-      Bagaimana Suhu Hari Ini?
-    </h2>
+      <!-- 🌡️ Left Section – Temperature Trend -->
+      <div class="flex-1 flex flex-col justify-start items-start relative pr-6">
+        <!-- Title -->
+        <h2 class="text-[36px] font-bold text-gray-900 mb-6 text-left">
+          Bagaimana Suhu Hari Ini?
+        </h2>
 
-    <!-- Graph Section -->
-    <div class="flex justify-between items-end w-full relative pb-10">
-      <!-- Pagi -->
-      <div class="flex flex-col items-center flex-1 relative">
-        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-gray-100">
-          <img src="assets/icons/cloudysmall.svg" alt="Pagi" class="w-7 h-7">
-        </div>
+        <!-- Graph Section -->
+        <div class="flex justify-between items-end w-full relative pb-10">
+          <!-- Pagi -->
+          <div class="flex flex-col items-center flex-1 relative">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-gray-100">
+              <img src="assets/icons/cloudysmall.svg" alt="Pagi" class="w-7 h-7">
+            </div>
 
-        <div class="relative top-24 flex flex-col items-center">
-        <p class="text-[36px] font-bold text-gray-800 mt-2">16°</p>
-        <p class="text-gray-500 text-[16px] mt-1">Pagi</p>
+            <div class="relative top-24 flex flex-col items-center">
+            <p class="text-[36px] font-bold text-gray-800 mt-2"><?= $pagi_temp ?>°</p>
+            <p class="text-gray-500 text-[16px] mt-1">Pagi</p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="absolute top-0 bottom-0 border-l border-gray-300 left-1/4"></div>
+
+          <!-- Siang -->
+          <div class="flex flex-col items-center flex-1 relative">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-yellow-100">
+              <img src="assets/icons/<?= $siang_icon ?>" alt="Siang" class="w-7 h-7">
+            </div>
+
+            <div class="relative top-24 flex flex-col items-center">
+            <p class="text-[36px] font-bold text-gray-800 mt-2"><?= $siang_temp ?>°</p>
+            <p class="text-gray-500 text-[16px] mt-1">Siang</p>
+            </div>
+          </div>
+
+          <div class="absolute top-0 bottom-0 border-l border-gray-300 left-2/4"></div>
+
+          <!-- Sore -->
+          <div class="flex flex-col items-center flex-1 relative">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-yellow-50">
+              <img src="assets/icons/<?= $sore_icon ?>" alt="Sore" class="w-7 h-7">
+            </div>
+            <div class="relative top-24 flex flex-col items-center">
+            <p class="text-[36px] font-bold text-gray-800 mt-2"><?= $sore_temp ?>°</p>
+            <p class="text-gray-500 text-[16px] mt-1">Sore</p>
+            </div>
+          </div>
+
+          <div class="absolute top-0 bottom-0 border-l border-gray-300 left-3/4"></div>
+
+          <!-- Malam -->
+          <div class="flex flex-col items-center flex-1 relative">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-gray-100">
+              <img src="assets/icons/moonsmall.svg" alt="Malam" class="w-7 h-7">
+            </div>
+
+            <div class="relative top-24 flex flex-col items-center">
+            <p class="text-[36px] font-bold text-gray-800 mt-2"><?= $malam_temp ?>°</p>
+            <p class="text-gray-500 text-[16px] mt-1">Malam</p>
+            </div>
+          </div>
+
+          <!-- Curve Line -->
+          <img src="assets/lines/tempcurve.svg" alt="Temperature Curve"
+            class="absolute bottom-6 left-0 w-full h-20 object-contain pointer-events-none">
         </div>
       </div>
 
-      <!-- Divider -->
-      <div class="absolute top-0 bottom-0 border-l border-gray-300 left-1/4"></div>
-
-      <!-- Siang -->
-      <div class="flex flex-col items-center flex-1 relative">
-        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-yellow-100">
-          <img src="assets/icons/sunsmall.svg" alt="Siang" class="w-7 h-7">
+      <!-- 🌤️ Right Section – Tomorrow Summary -->
+      <div class="flex-shrink-0 w-[400px] rounded-2xl p-6 flex flex-col justify-between ml-4"
+        style="background-image: url('<?= $final_bg ?>'); background-size: cover; background-position: center; min-height: 100%;">
+        <div class="text-left">
+          <p class="text-[24px] text-white/80">Besok</p>
+          <h3 class="text-[36px] font-bold text-white"><?= $location ?></h3>
         </div>
-        
-        <div class="relative top-24 flex flex-col items-center">
-        <p class="text-[36px] font-bold text-gray-800 mt-2">32°</p>
-        <p class="text-gray-500 text-[16px] mt-1">Siang</p>
+        <div class="text-left">
+          <p class="text-[32px] font-bold text-white"><?= $tomorrow_temp ?></p>
+          <p class="text-white text-[16px]"><?= $tomorrow_desc ?></p>
         </div>
       </div>
-
-      <div class="absolute top-0 bottom-0 border-l border-gray-300 left-2/4"></div>
-
-      <!-- Sore -->
-      <div class="flex flex-col items-center flex-1 relative">
-        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-yellow-50">
-          <img src="assets/icons/cloudysunsmall.svg" alt="Sore" class="w-7 h-7">
-        </div>
-        <div class="relative top-24 flex flex-col items-center">
-        <p class="text-[36px] font-bold text-gray-800 mt-2">28°</p>
-        <p class="text-gray-500 text-[16px] mt-1">Sore</p>
-        </div>
-      </div>
-
-      <div class="absolute top-0 bottom-0 border-l border-gray-300 left-3/4"></div>
-
-      <!-- Malam -->
-      <div class="flex flex-col items-center flex-1 relative">
-        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-gray-100">
-          <img src="assets/icons/moonsmall.svg" alt="Malam" class="w-7 h-7">
-        </div>
-        
-        <div class="relative top-24 flex flex-col items-center">
-        <p class="text-[36px] font-bold text-gray-800 mt-2">20°</p>
-        <p class="text-gray-500 text-[16px] mt-1">Malam</p>
-        </div>
-      </div>
-
-      <!-- Curve Line -->
-      <img src="assets/lines/tempcurve.svg" alt="Temperature Curve"
-        class="absolute bottom-6 left-0 w-full h-20 object-contain pointer-events-none">
     </div>
-  </div>
-
-  <!-- 🌤️ Right Section – Tomorrow Summary -->
-  <div class="flex-shrink-0 w-[400px] rounded-2xl p-6 flex flex-col justify-between ml-4"
-    style="background-image: url('assets/img/nighttheme.png'); background-size: cover; background-position: center; min-height: 100%;">
-    <div class="text-left">
-      <p class="text-[24px] text-white/80">Besok</p>
-      <h3 class="text-[36px] font-bold text-white">Jakarta</h3>
-    </div>
-    <div class="text-left">
-      <p class="text-[32px] font-bold text-white">20°C</p>
-      <p class="text-white text-[16px]">Cerah</p>
-    </div>
-  </div>
-</div>
-
     </div>
 
     <!-- Right Column -->
@@ -260,63 +251,29 @@
         <div id="tomorrow-tab" class="flex-1 text-center border-b-0 font-normal text-white cursor-pointer uppercase" onclick="switchTab('tomorrow')">Tomorrow</div>
       </div>
       <div id="today-content" class="flex-1 mt-4">
-        <?php
-        function getCustomIcon($icon) {
-          $code = substr($icon, 0, 2);
-          switch($code) {
-            case '01': return 'clearsky.svg';
-            case '02': return 'fewclouds.svg';
-            case '03':
-            case '04': return 'brokenclouds.svg';
-            case '09':
-            case '10': return 'rain.svg';
-            case '11': return 'thunderstrom.svg';
-            default: return false; // Use default OpenWeatherMap icon
-          }
-        }
-        ?>
-        <?php if ($forecast && isset($forecast['list'])): ?>
+        <?php if (!empty($today_forecast)): ?>
           <div class="space-y-4 overflow-y-auto max-h-full">
-            <?php
-            $today = date('Y-m-d');
-            $count = 0;
-            foreach ($forecast['list'] as $item):
-              if ($count >= 8) break; // Show only 8 entries (24 hours / 3 hours = 8)
-              $dt = date('Y-m-d', strtotime($item['dt_txt']));
-              if ($dt === $today):
-                $time = date('H:i', strtotime($item['dt_txt']));
-                $temp = round($item['main']['temp']);
-                $humidity = $item['main']['humidity'];
-                $windSpeed = $item['wind']['speed'];
-                $description = ucfirst($item['weather'][0]['description']);
-                $icon = $item['weather'][0]['icon'];
-                $customIcon = getCustomIcon($icon);
-                $iconSrc = $customIcon ? "assets/icons/{$customIcon}" : "https://openweathermap.org/img/wn/{$icon}@2x.png";
-            ?>
+            <?php foreach ($today_forecast as $item): ?>
               <div class="bg-white bg-opacity-20 rounded-lg p-3 flex items-center justify-between">
                 <div class="flex items-center space-x-16 pl-6">
-                  <img src="<?= $iconSrc ?>" alt="<?= $description ?>" class="w-10 h-10">
+                  <img src="<?= $item['iconSrc'] ?>" alt="<?= $item['description'] ?>" class="w-10 h-10">
                   <div class="flex flex-col items-center text-center w-40 truncate">
-                    <p class="text-white font-bold text-lg"><?= $time ?></p>
-                    <p class="text-white font-bold text-lg opacity-80 truncate"><?= $description ?></p>
+                    <p class="text-white font-bold text-lg"><?= $item['time'] ?></p>
+                    <p class="text-white font-bold text-lg opacity-80 truncate"><?= $item['description'] ?></p>
                   </div>
                 </div>
                 <div class="flex items-end text-white space-x-12 text-right">
                 <!-- Temperature -->
-                <p class="text-[40px] font-extrabold"><?= $temp ?>°C</p>
+                <p class="text-[40px] font-extrabold"><?= $item['temp'] ?>°C</p>
 
                 <!-- Humidity + Wind (stacked vertically, right aligned) -->
                 <div class="flex flex-col text-xl font-semibold leading-tight items-start pr-10">
-                  <p><img src="assets/icons/humidity.svg" alt="Humidity" class="w-4 h-4 inline"> <?= $humidity ?>%</p>
-                  <p><img src="assets/icons/forecastwind.svg" alt="Wind" class="w-4 h-4 inline"> <?= $windSpeed ?> m/s</p>
+                  <p><img src="assets/icons/humidity.svg" alt="Humidity" class="w-4 h-4 inline"> <?= $item['humidity'] ?>%</p>
+                  <p><img src="assets/icons/forecastwind.svg" alt="Wind" class="w-4 h-4 inline"> <?= $item['windSpeed'] ?> m/s</p>
                 </div>
               </div>
             </div>
-            <?php
-                $count++;
-              endif;
-            endforeach;
-            ?>
+            <?php endforeach; ?>
           </div>
         <?php else: ?>
           <div class="flex items-center justify-center text-gray-400 h-full">
@@ -325,48 +282,29 @@
         <?php endif; ?>
       </div>
       <div id="tomorrow-content" class="flex-1 mt-4 hidden">
-        <?php if ($forecast && isset($forecast['list'])): ?>
+        <?php if (!empty($tomorrow_forecast)): ?>
           <div class="space-y-4 overflow-y-auto max-h-full">
-            <?php
-            $tomorrow = date('Y-m-d', strtotime('+1 day'));
-            $count = 0;
-            foreach ($forecast['list'] as $item):
-              if ($count >= 8) break; // Show only 8 entries (24 hours / 3 hours = 8)
-              $dt = date('Y-m-d', strtotime($item['dt_txt']));
-              if ($dt === $tomorrow):
-                $time = date('H:i', strtotime($item['dt_txt']));
-                $temp = round($item['main']['temp']);
-                $humidity = $item['main']['humidity'];
-                $windSpeed = $item['wind']['speed'];
-                $description = ucfirst($item['weather'][0]['description']);
-                $icon = $item['weather'][0]['icon'];
-                $customIcon = getCustomIcon($icon);
-                $iconSrc = $customIcon ? "assets/icons/{$customIcon}" : "https://openweathermap.org/img/wn/{$icon}@2x.png";
-            ?>
+            <?php foreach ($tomorrow_forecast as $item): ?>
               <div class="bg-white bg-opacity-20 rounded-lg p-3 flex items-center justify-between">
                 <div class="flex items-center space-x-16 pl-6">
-                  <img src="<?= $iconSrc ?>" alt="<?= $description ?>" class="w-10 h-10">
+                  <img src="<?= $item['iconSrc'] ?>" alt="<?= $item['description'] ?>" class="w-10 h-10">
                   <div class="flex flex-col items-center text-center w-40 truncate">
-                    <p class="text-white font-bold text-lg"><?= $time ?></p>
-                    <p class="text-white font-bold text-lg opacity-80 truncate"><?= $description ?></p>
+                    <p class="text-white font-bold text-lg"><?= $item['time'] ?></p>
+                    <p class="text-white font-bold text-lg opacity-80 truncate"><?= $item['description'] ?></p>
                   </div>
                 </div>
                 <div class="flex items-end text-white space-x-12 text-right">
                 <!-- Temperature -->
-                <p class="text-[40px] font-extrabold"><?= $temp ?>°C</p>
+                <p class="text-[40px] font-extrabold"><?= $item['temp'] ?>°C</p>
 
                 <!-- Humidity + Wind (stacked vertically, right aligned) -->
                 <div class="flex flex-col text-xl font-semibold leading-tight items-start pr-10">
-                  <p><img src="assets/icons/humidity.svg" alt="Humidity" class="w-4 h-4 inline"> <?= $humidity ?>%</p>
-                  <p><img src="assets/icons/forecastwind.svg" alt="Wind" class="w-4 h-4 inline"> <?= $windSpeed ?> m/s</p>
+                  <p><img src="assets/icons/humidity.svg" alt="Humidity" class="w-4 h-4 inline"> <?= $item['humidity'] ?>%</p>
+                  <p><img src="assets/icons/forecastwind.svg" alt="Wind" class="w-4 h-4 inline"> <?= $item['windSpeed'] ?> m/s</p>
                 </div>
               </div>
             </div>
-            <?php
-                $count++;
-              endif;
-            endforeach;
-            ?>
+            <?php endforeach; ?>
           </div>
         <?php else: ?>
           <div class="flex items-center justify-center text-gray-400 h-full">
