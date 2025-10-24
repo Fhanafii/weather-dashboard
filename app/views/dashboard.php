@@ -165,30 +165,92 @@
         </div>
       </div>
 
-      <!-- Sunrise/Sunset Card -->
-      <div class="col-span-2 bg-white rounded-2xl p-6 shadow flex flex-col items-center">
-        <h2 class="text-lg font-semibold mb-4">Fajar & Senja</h2>
-        <div class="w-full h-40 flex items-end justify-between">
-          <div class="text-center">
-            <p>Fajar</p>
-            <p class="font-bold">
-                <?= isset($weather['sys']['sunrise']) ? date('H.i', $weather['sys']['sunrise']) : '—'; ?>
-            </p>
-          </div>
-          <div class="relative w-2/3 h-full">
-            <div class="absolute bottom-0 left-0 right-0 border-b border-gray-800"></div>
-            <div class="absolute bottom-0 left-0 right-0 flex justify-center items-end h-full">
-              <div class="w-6 h-6 bg-yellow-400 rounded-full border-2 border-yellow-600"></div>
-            </div>
-          </div>
-          <div class="text-center">
-            <p>Senja</p>
-            <p class="font-bold">
-                <?= isset($weather['sys']['sunset']) ? date('H.i', $weather['sys']['sunset']) : '—'; ?>
-            </p>
-          </div>
+<!-- Temperature Trend Card -->
+<div class="col-span-2 bg-white rounded-2xl p-6 shadow flex justify-between items-stretch relative">
+
+  <!-- 🌡️ Left Section – Temperature Trend -->
+  <div class="flex-1 flex flex-col justify-start items-start relative pr-6">
+    <!-- Title -->
+    <h2 class="text-[36px] font-bold text-gray-900 mb-6 text-left">
+      Bagaimana Suhu Hari Ini?
+    </h2>
+
+    <!-- Graph Section -->
+    <div class="flex justify-between items-end w-full relative pb-10">
+      <!-- Pagi -->
+      <div class="flex flex-col items-center flex-1 relative">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-gray-100">
+          <img src="assets/icons/cloudysmall.svg" alt="Pagi" class="w-7 h-7">
+        </div>
+
+        <div class="relative top-24 flex flex-col items-center">
+        <p class="text-[36px] font-bold text-gray-800 mt-2">16°</p>
+        <p class="text-gray-500 text-[16px] mt-1">Pagi</p>
         </div>
       </div>
+
+      <!-- Divider -->
+      <div class="absolute top-0 bottom-0 border-l border-gray-300 left-1/4"></div>
+
+      <!-- Siang -->
+      <div class="flex flex-col items-center flex-1 relative">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-yellow-100">
+          <img src="assets/icons/sunsmall.svg" alt="Siang" class="w-7 h-7">
+        </div>
+        
+        <div class="relative top-24 flex flex-col items-center">
+        <p class="text-[36px] font-bold text-gray-800 mt-2">32°</p>
+        <p class="text-gray-500 text-[16px] mt-1">Siang</p>
+        </div>
+      </div>
+
+      <div class="absolute top-0 bottom-0 border-l border-gray-300 left-2/4"></div>
+
+      <!-- Sore -->
+      <div class="flex flex-col items-center flex-1 relative">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-yellow-50">
+          <img src="assets/icons/cloudysunsmall.svg" alt="Sore" class="w-7 h-7">
+        </div>
+        <div class="relative top-24 flex flex-col items-center">
+        <p class="text-[36px] font-bold text-gray-800 mt-2">28°</p>
+        <p class="text-gray-500 text-[16px] mt-1">Sore</p>
+        </div>
+      </div>
+
+      <div class="absolute top-0 bottom-0 border-l border-gray-300 left-3/4"></div>
+
+      <!-- Malam -->
+      <div class="flex flex-col items-center flex-1 relative">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center mb-2 bg-gray-100">
+          <img src="assets/icons/moonsmall.svg" alt="Malam" class="w-7 h-7">
+        </div>
+        
+        <div class="relative top-24 flex flex-col items-center">
+        <p class="text-[36px] font-bold text-gray-800 mt-2">20°</p>
+        <p class="text-gray-500 text-[16px] mt-1">Malam</p>
+        </div>
+      </div>
+
+      <!-- Curve Line -->
+      <img src="assets/lines/tempcurve.svg" alt="Temperature Curve"
+        class="absolute bottom-6 left-0 w-full h-20 object-contain pointer-events-none">
+    </div>
+  </div>
+
+  <!-- 🌤️ Right Section – Tomorrow Summary -->
+  <div class="flex-shrink-0 w-[400px] rounded-2xl p-6 flex flex-col justify-between ml-4"
+    style="background-image: url('assets/img/nighttheme.png'); background-size: cover; background-position: center; min-height: 100%;">
+    <div class="text-left">
+      <p class="text-[24px] text-white/80">Besok</p>
+      <h3 class="text-[36px] font-bold text-white">Jakarta</h3>
+    </div>
+    <div class="text-left">
+      <p class="text-[32px] font-bold text-white">20°C</p>
+      <p class="text-white text-[16px]">Cerah</p>
+    </div>
+  </div>
+</div>
+
     </div>
 
     <!-- Right Column -->

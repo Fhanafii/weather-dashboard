@@ -55,32 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Common cities for suggestions (you can expand this)
         const commonCities = [
-            // Java
-            'Jakarta', 'Bandung', 'Bekasi', 'Depok', 'Bogor', 'Tangerang', 'South Tangerang',
-            'Semarang', 'Surabaya', 'Malang', 'Yogyakarta', 'Solo', 'Cirebon', 'Purwokerto',
-
-            // Sumatra
-            'Medan', 'Padang', 'Pekanbaru', 'Palembang', 'Jambi', 'Bengkulu',
-            'Bandar Lampung', 'Lhokseumawe', 'Tanjung Pinang', 'Batam',
-
-            // Kalimantan
-            'Pontianak', 'Banjarmasin', 'Samarinda', 'Balikpapan', 'Palangkaraya',
-
-            // Sulawesi
-            'Makassar', 'Manado', 'Palu', 'Kendari', 'Gorontalo', 'Parepare',
-
-            // Bali & Nusa Tenggara
-            'Denpasar', 'Mataram', 'Kupang',
-
-            // Papua & Maluku
-            'Jayapura', 'Ambon', 'Ternate', 'Sorong', 'Manokwari',
-
-            // Other notable/regional cities
-            'Cilegon', 'Tasikmalaya', 'Sukabumi', 'Probolinggo', 'Jember',
-            'Kediri', 'Blitar', 'Salatiga', 'Magelang', 'Banyuwangi',
-            'Palopo', 'Bitung', 'Tarakan', 'Tebing Tinggi', 'Pematangsiantar'
+            'Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang',
+            'Palembang', 'Makassar', 'Depok', 'Tangerang', 'South Tangerang',
+            'Bekasi', 'Bogor', 'Malang', 'Padang', 'Denpasar'
         ];
-
 
         const filteredCities = commonCities.filter(city =>
             city.toLowerCase().includes(query.toLowerCase())
