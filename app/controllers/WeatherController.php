@@ -143,6 +143,21 @@ class WeatherController {
         $siang_icon = $siang_temp > 28 ? 'sunsmall.svg' : 'cloudysunsmall.svg';
         $sore_icon = $sore_temp > 28 ? 'sunsmall.svg' : 'cloudysunsmall.svg';
 
+        // Determine weather card background based on local time
+        $weather_bg = 'assets/img/morning.png'; // default
+        if ($weather && isset($weather['timezone'])) {
+            $utc_time = time();
+            $local_time = $utc_time + $weather['timezone'];
+            $local_hour = (int) date('H', $local_time);
+            if ($local_hour >= 6 && $local_hour <= 11) {
+                $weather_bg = 'assets/img/morning.png';
+            } elseif ($local_hour >= 18 && $local_hour <= 20) {
+                $weather_bg = 'assets/img/dusk.png';
+            } else {
+                $weather_bg = 'assets/img/night.png';
+            }
+        }
+
         // Debug: Print weather data
         // echo "<pre>Weather Data: ";
         // print_r($weather);

@@ -69,7 +69,7 @@
     <!-- Left Column -->
     <div class="col-span-2 grid grid-cols-2 gap-6">
       <!-- Weather Card -->
-        <div class="rounded-2xl p-6 shadow flex flex-col justify-between" style="background-image: url('assets/img/sore.png'); background-size: cover; background-position: center;">
+        <div class="rounded-2xl p-6 shadow flex flex-col justify-between" style="background-image: url('<?= $weather_bg ?>'); background-size: cover; background-position: center;">
         <!-- Header with icon and texts -->
         <div class="flex items-center mb-4">
           <div class="w-12 h-12 bg-white rounded-full mr-4 flex-shrink-0 flex items-center justify-center">
