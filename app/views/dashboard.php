@@ -1,3 +1,4 @@
+<?php include __DIR__ . '/../middleware/auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +60,10 @@
       <!-- User Profile -->
       <div class="flex items-center space-x-2 border px-3 py-2 rounded-full">
         <div class="w-8 h-8 bg-[#F9802C] rounded-full"></div>
-        <span class="text-gray-700 font-medium">Fahmi Hanafi</span>
+        <span class="text-gray-700 font-medium">
+          <?= isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : 'User'; ?>
+        </span>
+        <a href="/logout.php" class="ml-2 text-gray-500 hover:text-gray-700">Logout</a>
       </div>
     </div>
   </header>
